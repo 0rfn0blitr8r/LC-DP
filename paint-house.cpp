@@ -13,7 +13,7 @@ public:
         int mini = INT_MAX;
         for(int i = 0; i < k; i++){
             if(i != col){
-                mini = min(mini, costFn(ndx+1, costs, i, dp));
+                mini = min(mini, costFn(ndx+1, costs, i, dp ,k));
             }
         }
 

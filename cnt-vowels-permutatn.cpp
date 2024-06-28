@@ -45,7 +45,37 @@ public:
     }
 };
 
+// Bottom-Up dp solution
+class Solution {
+public:
+    const unsigned int mod = 1e9 + 7;
 
+    /*
+    0 | a | e
+    1 | e | a, i
+    2 | i | a, e, o, u
+    3 | o | i, u
+    4 | u | a
+    */
+
+    int countVowelPermutation(int n) {
+        vector<int> cur(5, 0), prev(5, 1);
+        for(int i = 1; i < n; i++){
+            cur[0] = (prev[1]) % mod;
+            cur[1] = (prev[0] + prev[2]) % mod;
+            cur[2] = ((prev[0])% mod + (prev[1])% mod + (prev[3])% mod + (prev[4])% mod) % mod;
+            cur[3] = (prev[2] + prev[4]) % mod;
+            cur[4] = (prev[0]) % mod;
+
+            prev = cur;
+        }
+
+        int res = 0;
+        for(auto it : prev) res = (res + it)% mod;
+
+        return res;
+    }
+};
 
 int main(){
     
